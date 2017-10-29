@@ -1,6 +1,9 @@
 # ColorSocialFrame
 Class Color Friends, Guild and Who List.
 
+### Installation
+Get the [latest](https://github.com/Road-block/ColorSocialFrame/releases/latest) and extract in AddOns.
+
 ![Class Color Guild](https://github.com/Road-block/ColorSocialFrame/raw/docs/guild.png)
 
 ![Class Color Who - Zone](https://github.com/Road-block/ColorSocialFrame/raw/docs/who-zone.png)

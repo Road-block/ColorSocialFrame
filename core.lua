@@ -139,6 +139,9 @@ function addon:PLAYER_LOGIN()
   realmName = self:strtrim(GetCVar("realmName"))
   local profileKey = string.format("%s - %s",playerName,realmName)
   ColorSocialFrameDB = ColorSocialFrameDB or {[profileKey]={Friends={}}}
+  if not ColorSocialFrameDB[profileKey] then
+    ColorSocialFrameDB[profileKey]={Friends={}}
+  end
   self.db_profile = ColorSocialFrameDB[profileKey]
   self.db = ColorSocialFrameDB
   self.locale = GetLocale()
