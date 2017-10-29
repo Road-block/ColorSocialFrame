@@ -2,7 +2,7 @@
 ## Title: ColorSocialFrame
 ## Notes: Class Color player names in Guild, Friend and Who Lists.
 ## Author: Roadblock
-## Version: 1.01
+## Version: 1.1
 ## SavedVariables: ColorSocialFrameDB
 
 core.lua

@@ -260,20 +260,26 @@ function addon:WhoList_Update()
   for i=1, WHOS_TO_DISPLAY, 1 do
     local button = _G["WhoFrameButton"..i]
     local buttonName = _G["WhoFrameButton"..i.."Name"]
+    if not button._nameColor then
+      button._nameColor = button:CreateFontString("WhoFrameButton"..i.."NameColor","BORDER","GameFontNormalSmall")
+      button._nameColor:SetAllPoints(buttonName)
+      buttonName:Hide()
+    end
+    button._nameColor:SetText(buttonName:GetText())
     local buttonLevel = _G["WhoFrameButton"..i.."Level"]
     local buttonClass = _G["WhoFrameButton"..i.."Class"]
     local buttonVariable = _G["WhoFrameButton"..i.."Variable"]
     local selectedVar = addon.columnTable[UIDropDownMenu_GetSelectedID(WhoFrameDropDown)]
-    local name = buttonName:GetText()
+    local name = button._nameColor:GetText()
     if not (name) then break end
     local colorized = strfind(name,"|cff")
     local class = buttonClass:GetText()
-    local level = tonumber(buttonLevel:GetText())
+    local level = tonumber(buttonLevel:GetText()) or ""
     local levelColor = level and addon:RGBtoHEX(GetDifficultyColor(level)) or "|cffffffff"
     local variable = buttonVariable:GetText()
     local zone, zoneColor, guild, guildColor
     if not (colorized) then
-      buttonName:SetText(addon.classCache[name])
+      button._nameColor:SetText(addon.classCache[name])
       buttonLevel:SetText(strformat("%s%s|r",levelColor,level)) 
       buttonClass:SetText(addon.classColorCache[class])
       if selectedVar == "zone" then
