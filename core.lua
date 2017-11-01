@@ -200,7 +200,7 @@ function addon:GuildStatus_Update()
       if not (colorized) then
         buttonName:SetText(addon.classCache[name])
         buttonClass:SetText(addon.classColorCache[class])
-        buttonLevel:SetText(strformat("%s%s|r",levelColor,level))
+        buttonLevel:SetText(strformat("%s%s|r",levelColor,level or 0))
         buttonZone:SetText(strformat("%s%s|r",zoneColor,zone))
         if (offline) then
           buttonName:SetVertexColor(1,1,1,0.5)
@@ -274,13 +274,13 @@ function addon:WhoList_Update()
     if not (name) then break end
     local colorized = strfind(name,"|cff")
     local class = buttonClass:GetText()
-    local level = tonumber(buttonLevel:GetText()) or ""
+    local level = tonumber(buttonLevel:GetText())
     local levelColor = level and addon:RGBtoHEX(GetDifficultyColor(level)) or "|cffffffff"
     local variable = buttonVariable:GetText()
     local zone, zoneColor, guild, guildColor
     if not (colorized) then
       button._nameColor:SetText(addon.classCache[name])
-      buttonLevel:SetText(strformat("%s%s|r",levelColor,level)) 
+      buttonLevel:SetText(strformat("%s%s|r",levelColor,level or 0)) 
       buttonClass:SetText(addon.classColorCache[class])
       if selectedVar == "zone" then
         local my_zone = GetRealZoneText() or ""
