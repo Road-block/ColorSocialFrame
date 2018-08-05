@@ -153,8 +153,17 @@ function addon:PLAYER_LOGIN()
   WhoList_Update = self.WhoList_Update
   self.Hooks.FriendsList_Update = FriendsList_Update
   FriendsList_Update = self.FriendsList_Update
+  self:RegisterEvent("CHAT_MSG_SYSTEM")
   -- self.Hooks.IgnoreList_Update = IgnoreList_Update
   -- IgnoreList_Update = self.IgnoreList_Update
+end
+
+addon.friendOnlineCapture = gsub(gsub(gsub(ERR_FRIEND_ONLINE_SS,"([%(%)%.%+%-%*%?%[%]%^%$])","%%%1"),"%%s","(.-)"),"%%d","(%d+)")
+function addon:CHAT_MSG_SYSTEM(event, message)
+  local _,_,name = string.find(message, self.friendOnlineCapture)
+  if (name) then
+    self:FriendsList_Update()
+  end
 end
 
 function addon:ADDON_LOADED()
