@@ -161,7 +161,7 @@ end
 addon.friendOnlineCapture = gsub(gsub(gsub(ERR_FRIEND_ONLINE_SS,"([%(%)%.%+%-%*%?%[%]%^%$])","%%%1"),"%%s","(.-)"),"%%d","(%d+)")
 function addon:CHAT_MSG_SYSTEM(event, message)
   local _,_,name = string.find(message, self.friendOnlineCapture)
-  if (name) then
+  if (name) and addon.db_profile.Friends[name] then
     self:FriendsList_Update()
   end
 end
@@ -322,16 +322,17 @@ function addon:FriendsList_Update()
   addon.Hooks.FriendsList_Update()
   for i=1,GetNumFriends() do
     local name, level, class, area, connected, status = GetFriendInfo(i)
-    if (connected) then
-      if name ~= UNKNOWN and class ~= UNKNOWN then
-        local timestamp = date("%a %d-%b-%Y")
-        addon.db_profile.Friends[name] = {level=level,class=class,area=area,time=timestamp}        
+    if name ~= UNKNOWN and class ~= UNKNOWN then
+      local timestamp = ""
+      if (connected) then
+        timestamp = date("%a %d-%b-%Y")
         if addon.classCache[name] == nil then
           local g_class = classToCLASS[addon.locale][class]
           addon.classCache[name] = string.format("%s%s|r",CUSTOM_CLASS_COLORS[g_class].hex,name)
-        end
+        end        
       end
-    end    
+      addon.db_profile.Friends[name] = {level=level,class=class,area=area,time=timestamp}
+    end   
   end
   for i=1, FRIENDS_TO_DISPLAY, 1 do
     local button = _G["FriendsFrameFriendButton"..i]
