@@ -191,6 +191,12 @@ function addon:GuildStatus_Update()
     if addon.classCache[name]==nil then
       addon.classCache[name] = string.format("%s%s|r",CUSTOM_CLASS_COLORS[g_class].hex,name)
     end
+    local cached = addon.db_profile.Friends[name]
+    if (cached) then
+      addon.db_profile.Friends[name].level = level
+      addon.db_profile.Friends[name].class = class
+      addon.db_profile.Friends[name].area = zone
+    end
   end
   for i=1, GUILDMEMBERS_TO_DISPLAY, 1 do
     if (FriendsFrame.playerStatusFrame) then
