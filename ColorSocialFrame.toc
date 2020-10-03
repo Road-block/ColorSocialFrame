@@ -1,6 +1,8 @@
 ## Interface: 11200
 ## Title: ColorSocialFrame
+## Title-ruRU: ЦветноеСоциальноеОкно
 ## Notes: Class Color player names in Guild, Friend and Who Lists.
+## Notes-ruRU: Цветные классы имен игроков в Списке Гильдии, Друзей и Кто.
 ## Author: Roadblock
 ## Version: 1.30
 ## SavedVariables: ColorSocialFrameDB
